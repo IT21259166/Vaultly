@@ -6,6 +6,7 @@ import app from '../../../../firebaseConfig'
 import TotalFileCard from './_components/TotalFileCard'
 import FileList from './_components/FileList'
 import Link from 'next/link';
+
 function Files() {
   const db = getFirestore(app);
   const {user}=useUser();

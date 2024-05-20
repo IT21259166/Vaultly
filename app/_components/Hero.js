@@ -1,6 +1,7 @@
 import React from 'react'
 import Constant from '../_utils/Constant'
 
+
 function Hero() {
   return (
     <section className="bg-gray-50">
@@ -24,7 +25,7 @@ function Hero() {
            bg-primary px-12 py-3 text-sm 
            font-medium text-white shadow
             hover:bg-blue-700 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
-          href="/get-started"
+          href="/sign-up"
         >
           Get Started
         </a>
