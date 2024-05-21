@@ -18,10 +18,9 @@ pnpm dev
 bun dev
 ```
 
-## Required Files
+## Additionally Required Files
 
-Firebase Configuration file
-Local Environment Variable file
+Firebase Configuration file & Local Environment Variable file
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
