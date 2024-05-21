@@ -20,6 +20,17 @@ function UploadForm({ uploadBtnClick, progress }) {
 
         // Check file type
         const allowedTypes = ['image/png', 'image/jpeg', 'image/svg+xml', 'application/pdf'];
+        const disallowedTypes = [
+            'application/x-msdownload', 'application/x-msdos-program', 'application/x-msdos-windows', 'application/x-ms-shortcut', 
+            'application/x-msi', 'application/x-msdownload', 'application/x-exe', 'application/x-msdownload',
+            'application/octet-stream'
+        ];
+
+        if (disallowedTypes.includes(file.type)) {
+            setErrorMsg('Executable files are not allowed');
+            return;
+        }
+
         if (!allowedTypes.includes(file.type)) {
             setErrorMsg('Only PNG, JPG, SVG, and PDF files are allowed');
             return;
@@ -28,6 +39,13 @@ function UploadForm({ uploadBtnClick, progress }) {
         // Basic file extension check for extra security
         const fileExtension = file.name.split('.').pop().toLowerCase();
         const allowedExtensions = ['png', 'jpg', 'jpeg', 'svg', 'pdf'];
+        const disallowedExtensions = ['exe', 'msi', 'bat', 'cmd', 'sh', 'js', 'vbs', 'com', 'pif', 'scr', 'lnk', 'jar'];
+
+        if (disallowedExtensions.includes(fileExtension)) {
+            setErrorMsg('Executable files are not allowed');
+            return;
+        }
+
         if (!allowedExtensions.includes(fileExtension)) {
             setErrorMsg('File type not supported');
             return;
