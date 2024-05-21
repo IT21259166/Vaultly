@@ -33,14 +33,6 @@ function UploadForm({ uploadBtnClick, progress }) {
             return;
         }
 
-        // Placeholder for malware scanning
-        // const malwareScanner = new MalwareScanner();
-        // const isMalicious = await malwareScanner.scan(file);
-        // if (isMalicious) {
-        //     setErrorMsg('The file appears to be malicious');
-        //     return;
-        // }
-
         setErrorMsg(null);
         setFile(file);
     };
