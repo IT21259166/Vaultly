@@ -13,6 +13,20 @@ import {
     Section,
     Text,
   } from '@react-email/components';
+import { generateRandomString } from '../_utils/GenerateRandomString';
+
+  function generateShortUrl() {
+    // Logic to generate a unique identifier or hash for the file
+    const uniqueIdentifier = generateRandomString(); // Example function to generate a unique identifier
+    return `/f/${uniqueIdentifier}`;
+  }
+  
+  // In your server-side code where you construct the response object
+  const responce = {
+    // Other properties
+    shortUrl: generateShortUrl(), // Generate the short URL and provide only the path part
+    // Other properties
+  };
 
 export const EmailTemplate = ({
   responce,
@@ -25,7 +39,7 @@ export const EmailTemplate = ({
       <Container>
       
         <Section style={content}>
-          <Img width={620} src={`https://yt3.googleusercontent.com/K4ZufSCvqT-Mx7ylpkoroVUR47Ka7CotpcQcRa2VqX5X5gLB1I7I33lfREK8SBfAZIzBV77sim4=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj`} />
+          <Img width={620} src={`https://react-email-demo-8sniqc6eo-resend.vercel.app/static/yelp-header.png`} />
 
           <Row style={{  paddingBottom: '0' }}>
             <Column>
@@ -82,12 +96,10 @@ export const EmailTemplate = ({
             </Column>
           </Row>
          
-          <a href={responce?.shortUrl}>Click To Download</a>
+
           <Row style={{  paddingTop: '0' }}>
             <Column style={containerButton} colSpan={2}>
-              <Button style={button}
-              href={responce?.shortUrl}
-              >Click here to Download</Button>
+              <Button style={button} href={responce?.shortUrl}>Click here to Download</Button>
             </Column>
           </Row>
          
@@ -95,7 +107,7 @@ export const EmailTemplate = ({
         
 
         <Section style={containerImageFooter}>
-          <Img width={620} src={`https://yt3.googleusercontent.com/K4ZufSCvqT-Mx7ylpkoroVUR47Ka7CotpcQcRa2VqX5X5gLB1I7I33lfREK8SBfAZIzBV77sim4=w1060-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj`} />
+          <Img width={620} src={`https://react-email-demo-8sniqc6eo-resend.vercel.app/static/yelp-footer.png`} />
         </Section>
 
         <Text
