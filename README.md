@@ -1,8 +1,12 @@
+IT21259166 - Z. H. Muhammadh | IT21308116 - R.V.G.M.M Shakeer Udayar
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+Initially, run 'npm install' in order to install all the required dependencies.
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -13,6 +17,11 @@ pnpm dev
 # or
 bun dev
 ```
+
+## Required Files
+
+Firebase Configuration file
+Local Environment Variable file
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
