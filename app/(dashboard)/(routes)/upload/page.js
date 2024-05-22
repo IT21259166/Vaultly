@@ -1,4 +1,3 @@
-"use client"
 import React, { useEffect, useState } from 'react'
 import UploadForm from './_components/UploadForm'
 import { app } from './../../../../firebaseConfig'
