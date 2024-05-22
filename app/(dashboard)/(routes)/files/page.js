@@ -1,3 +1,5 @@
+"use client"
+
 import { UserButton, useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
