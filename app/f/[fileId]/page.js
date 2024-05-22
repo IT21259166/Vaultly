@@ -5,6 +5,7 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import FileItemC from './_componets/FileItemC'
 import Link from 'next/link';
 import Image from 'next/image';
+
 function FileView({params}) {
     const db = getFirestore(app);
     const [file,setFile]=useState();
