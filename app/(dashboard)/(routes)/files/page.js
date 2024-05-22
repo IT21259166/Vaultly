@@ -3,13 +3,18 @@
 import { UserButton, useUser } from '@clerk/nextjs';
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import app from '../../../../firebaseConfig';
 import TotalFileCard from './_components/TotalFileCard';
 import FileList from './_components/FileList';
 import Link from 'next/link';
 
+let app, db;
+
+if (typeof window !== "undefined") {
+  app = require('../../../../firebaseConfig').default;
+  db = getFirestore(app);
+}
+
 function Files() {
-  const db = getFirestore(app);
   const { user } = useUser();
   const [fileList, setFileList] = useState([]);
 
@@ -24,7 +29,6 @@ function Files() {
     const querySnapshot = await getDocs(q);
     setFileList([]);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
       setFileList(fileList => [...fileList, doc.data()]);
     });

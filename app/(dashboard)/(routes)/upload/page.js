@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import UploadForm from './_components/UploadForm';
-import { app } from './../../../../firebaseConfig';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import CompleteCheck from './_components/CompleteCheck';
 import { doc, getFirestore, setDoc } from "firebase/firestore";
@@ -10,12 +9,18 @@ import { useUser } from '@clerk/nextjs';
 import { generateRandomString } from './../../../_utils/GenerateRandomString';
 import { useRouter } from 'next/navigation';
 
+let app, storage, db;
+
+if (typeof window !== "undefined") {
+  app = require('./../../../../firebaseConfig').app;
+  storage = getStorage(app);
+  db = getFirestore(app);
+}
+
 function Upload() {
   const { user } = useUser();
   const [progress, setProgress] = useState();
   const router = useRouter();
-  const storage = getStorage(app);
-  const db = getFirestore(app);
   const [fileDocId, setFileDocId] = useState();
   const [uploadCompleted, setUploadCompleted] = useState(false);
 
@@ -27,7 +32,6 @@ function Upload() {
     const uploadTask = uploadBytesResumable(storageRef, file, metadata);
     uploadTask.on('state_changed',
       (snapshot) => {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
         setProgress(progress);
@@ -95,3 +99,4 @@ function Upload() {
 }
 
 export default Upload;
+
