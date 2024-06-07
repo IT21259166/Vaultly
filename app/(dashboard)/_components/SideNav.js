@@ -7,22 +7,28 @@ import React, { useState } from 'react'
 function SideNav({closeSideBar}) {
     const menuList=[
         {
-            id:1,
-            name:'Upload',
-            icon:Upload,
-            path:'/upload'
-        },
-        {
             id:2,
             name:'Files',
             icon:File,
             path:'/files'
         },
         {
+            id:1,
+            name:'Upload',
+            icon:Upload,
+            path:'/upload'
+        },
+        {
             id:3,
             name:'Upgrade',
             icon:Shield,
             path:'/upgrade'
+        },
+        {
+            id:4,
+            name:'Share',
+            icon:Shield,
+            path:'/share'
         },
 
     ]

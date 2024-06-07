@@ -1,48 +1,65 @@
+"use client"
+
 import React, { useState } from 'react';
+import CryptoJS from 'crypto-js';
 import AlertMsg from './AlertMsg';
 import FilePreview from './FilePreview';
 import ProgressBar from './ProgressBar';
-// Import malware scanning library if available
-// import MalwareScanner from 'js-antimalware'; // Example, ensure you have this library
 
 function UploadForm({ uploadBtnClick, progress }) {
     const [file, setFile] = useState();
     const [errorMsg, setErrorMsg] = useState();
 
+    const encryptFile = (file) => {
+        const reader = new FileReader();
+        const secretKey = '6Ab82lbEeCWwtxWsfJWqKQU2onvhU1LPhYMqpHYZS69fnHSZwf76C37CmBYWSaA9gIdzhQeOG9iZbGPDxpjY6YoiGzn517liV7OPT7BFSEpmRIF4ZpZzLtkCLcQkm8IJ'; // temporary secret key for testing
+        reader.readAsArrayBuffer(file);
+        reader.onload = (event) => {
+            const fileData = event.target.result;
+            const wordArray = CryptoJS.lib.WordArray.create(fileData);
+            const encryptedData = CryptoJS.AES.encrypt(wordArray, secretKey).toString();
+            const encryptedFile = new File([encryptedData], file.name, { type: file.type });
+            setFile(encryptedFile);
+        };
+    };
+
     const onFileSelect = async (file) => {
         if (!file) return;
 
         // Check file size
-        if (file.size > 2000000) {
-            setErrorMsg('Maximum File Upload Size is 2MB');
+        if (file.size > 5000000) {
+            setErrorMsg('Maximum File Upload Size is 5MB');
             return;
         }
 
         // Check file type
-        const allowedTypes = ['image/png', 'image/jpeg', 'image/svg+xml', 'application/pdf'];
+        const allowedTypes = [
+            'image/png', 'image/jpeg', 'image/svg+xml', 'application/pdf', 
+            'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ];
         const disallowedTypes = [
-            'application/x-msdownload', 'application/x-msdos-program', 'application/x-msdos-windows', 'application/x-ms-shortcut', 
-            'application/x-msi', 'application/x-msdownload', 'application/x-exe', 'application/x-msdownload',
-            'application/octet-stream'
+            'application/x-msdownload', 'application/x-msdos-program', 'application/x-msdos-windows', 
+            'application/x-ms-shortcut', 'application/x-msi', 'application/x-exe', 
+            'application/octet-stream', 'application/xml', 'text/xml'
         ];
 
         if (disallowedTypes.includes(file.type)) {
-            setErrorMsg('Executable files are not allowed');
+            setErrorMsg('Executable or XML files are not allowed');
             return;
         }
 
         if (!allowedTypes.includes(file.type)) {
-            setErrorMsg('Only PNG, JPG, SVG, and PDF files are allowed');
+            setErrorMsg('Only PNG, JPG, SVG, PDF, and Word files are allowed');
             return;
         }
 
         // Basic file extension check for extra security
         const fileExtension = file.name.split('.').pop().toLowerCase();
-        const allowedExtensions = ['png', 'jpg', 'jpeg', 'svg', 'pdf'];
-        const disallowedExtensions = ['exe', 'msi', 'bat', 'cmd', 'sh', 'js', 'vbs', 'com', 'pif', 'scr', 'lnk', 'jar'];
+        const allowedExtensions = ['png', 'jpg', 'jpeg', 'svg', 'pdf', 'doc', 'docx'];
+        const disallowedExtensions = ['exe', 'msi', 'bat', 'cmd', 'sh', 'js', 'vbs', 'com', 'pif', 'scr', 'lnk', 'jar', 'xml'];
 
         if (disallowedExtensions.includes(fileExtension)) {
-            setErrorMsg('Executable files are not allowed');
+            setErrorMsg('Executable or XML files are not allowed');
             return;
         }
 
@@ -52,7 +69,7 @@ function UploadForm({ uploadBtnClick, progress }) {
         }
 
         setErrorMsg(null);
-        setFile(file);
+        encryptFile(file);
     };
 
     return (
@@ -78,7 +95,7 @@ function UploadForm({ uploadBtnClick, progress }) {
                                 Click to upload</span>
                             or <strong className='text-primary'>
                                 drag</strong> and <strong className='text-primary'>drop</strong></p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, SVG, or PDF (Max Size: 2MB)</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">PNG, JPG, SVG, PDF, or Word (Max Size: 5MB)</p>
                     </div>
                     <input id="dropzone-file"
                         type="file" className="hidden"
