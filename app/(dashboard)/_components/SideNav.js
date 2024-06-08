@@ -33,7 +33,7 @@ function SideNav({closeSideBar}) {
 
     ]
 
-    const [activeIndex,setActiveIndex]=useState(0);
+    const [activeIndex,setActiveIndex]=useState();
   return (
     <div className='shadow-sm border-r h-full'>
         <div className='p-5 border-b'>

@@ -16,7 +16,7 @@ function Header() {
       <nav aria-label="Global" className="hidden md:block">
         <ul className="flex items-center gap-6 text-sm">
           <li>
-            <a className="text-gray-500 transition hover:text-gray-500/75" href="/upload">
+            <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
               Home
             </a>
           </li>
@@ -35,7 +35,7 @@ function Header() {
           </li>
 
           <li>
-            <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
+            <a className="text-gray-500 transition hover:text-gray-500/75" href="/contact">
               Contact Us
             </a>
           </li>
@@ -51,9 +51,9 @@ function Header() {
              bg-primary px-5 py-2.5 
              text-sm font-medium text-white 
              transition hover:bg-blue-700"
-            href="/files"
+            href="sign-in"
           >
-            Get Started
+            Login
           </a>
 
          
