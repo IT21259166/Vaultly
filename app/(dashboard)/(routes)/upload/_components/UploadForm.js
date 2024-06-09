@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react';
-import CryptoJS from 'crypto-js';
 import AlertMsg from './AlertMsg';
 import FilePreview from './FilePreview';
 import ProgressBar from './ProgressBar';
@@ -9,19 +8,6 @@ import ProgressBar from './ProgressBar';
 function UploadForm({ uploadBtnClick, progress }) {
     const [file, setFile] = useState();
     const [errorMsg, setErrorMsg] = useState();
-
-    const encryptFile = (file) => {
-        const reader = new FileReader();
-        const secretKey = '6Ab82lbEeCWwtxWsfJWqKQU2onvhU1LPhYMqpHYZS69fnHSZwf76C37CmBYWSaA9gIdzhQeOG9iZbGPDxpjY6YoiGzn517liV7OPT7BFSEpmRIF4ZpZzLtkCLcQkm8IJ'; // temporary secret key for testing
-        reader.readAsArrayBuffer(file);
-        reader.onload = (event) => {
-            const fileData = event.target.result;
-            const wordArray = CryptoJS.lib.WordArray.create(fileData);
-            const encryptedData = CryptoJS.AES.encrypt(wordArray, secretKey).toString();
-            const encryptedFile = new File([encryptedData], file.name, { type: file.type });
-            setFile(encryptedFile);
-        };
-    };
 
     const onFileSelect = async (file) => {
         if (!file) return;
@@ -69,7 +55,7 @@ function UploadForm({ uploadBtnClick, progress }) {
         }
 
         setErrorMsg(null);
-        encryptFile(file);
+        setFile(file);
     };
 
     return (
