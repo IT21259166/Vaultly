@@ -5,15 +5,15 @@ import { getAnalytics } from "firebase/analytics";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK vx.x.x and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDlzrLp_Bmgg0-_jXYz0Dy2RrhLnya0_rA",
-  authDomain: "file-storage-and-share.firebaseapp.com",
-  projectId: "file-storage-and-share",
-  storageBucket: "file-storage-and-share.appspot.com",
-  messagingSenderId: "409966978241",
-  appId: "1:409966978241:web:673cffd8efbbf9ef3fa040",
-  measurementId: "G-FGTR37EDGC"
+  apiKey: "yOur_fIreBaSe_aPi_key",
+  authDomain: "yOuR_stoRagE_aUth_DomAiN",
+  projectId: "yOur_pRoJect_iD",
+  storageBucket: "yOuR_stoRagE_bUckEt_locAtion",
+  messagingSenderId: "yOur_sEnder_iD",
+  appId: "yoUr_aPp_iD",
+  measurementId: "yoUr_meaSurEmEnt_ID"
 };
 
 // Initialize Firebase
